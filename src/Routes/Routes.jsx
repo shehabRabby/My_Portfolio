@@ -6,6 +6,7 @@ import Contact from "../Pages/Contact/Contact";
 import Projects from "../Pages/Projects/Projects";
 import Academcia from "../Pages/Education/Academcia";
 import Achievement from "../Pages/Achievement/Achievement";
+import ReadStory from "../Pages/About/ReadStory";
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ export const router = createBrowserRouter([
       {
         path: "/about-me",
         Component: Aboutme,
+      },
+      {
+        path: "/readmy-story",
+        Component: ReadStory,
       },
       {
         path: "/projects",

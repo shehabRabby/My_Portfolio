@@ -1,58 +1,132 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaBars, FaTimes, FaDownload } from "react-icons/fa";
 
 const Navbar = () => {
-  const links = (
-    <>
-      <li><Link to="/">Home</Link></li>
-      <li><Link to="/about-me">About Me</Link></li>
-      <li><Link to="/projects">Projects</Link></li>
-      <li><Link to="/academic">Academic</Link></li>
-      <li><Link to="/achievement">Achievement</Link></li>
-      <li><Link to="/contact-me">Contact</Link></li>
-    </>
-  );
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Resume details for Shehab Rabby
+  const resumeLink =
+    "https://drive.google.com/uc?export=download&id=1MFjgM3taPDCTlZqzzax57t3DWzLlL6Xs";
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: "Home", path: "/" },
+    { name: "About Me", path: "/about-me" },
+    { name: "Projects", path: "/projects" },
+    { name: "Academic", path: "/academic" },
+    { name: "Achievement", path: "/achievement" },
+    { name: "Contact", path: "/contact-me" },
+  ];
 
   return (
-    <div>
-      <div className="navbar bg-base-100 shadow-sm">
-        <div className="navbar-start">
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                {" "}
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />{" "}
-              </svg>
-            </div>
-            <ul
-              tabIndex="-1"
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
-            >
-              {links}
-            </ul>
-          </div>
+    <nav
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-black/60 backdrop-blur-lg border-b border-white/10 py-3"
+          : "bg-transparent py-5"
+      }`}
+    >
+      <div className="container max-w-7xl  mx-auto px-6 flex justify-between items-center">
+        {/* Logo with Hover Animation */}
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          className="text-2xl font-black tracking-tighter text-white cursor-pointer"
+        >
+          <Link to="/">
+            SHEHAB<span className="text-purple-500">.</span>
+          </Link>
+        </motion.div>
 
-          <a className="btn btn-ghost text-xl">MD.SHEHAB</a>
+        {/* Desktop Menu */}
+        <div className="hidden lg:flex items-center space-x-8">
+          <ul className="flex space-x-6 text-sm font-medium text-gray-300">
+            {navLinks.map((link, idx) => (
+              <motion.li key={idx} whileHover={{ y: -2, color: "#fff" }}>
+                <Link
+                  to={link.path}
+                  className="hover:text-purple-400 transition-colors"
+                >
+                  {link.name}
+                </Link>
+              </motion.li>
+            ))}
+          </ul>
+
+          <motion.a
+            href={resumeLink}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-xs font-bold text-white shadow-lg shadow-purple-500/20"
+          >
+            RESUME <FaDownload />
+          </motion.a>
         </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{links}</ul>
-        </div>
-        <div className="navbar-end">
-          <a className="btn">Resume</a>
-        </div>
+
+        {/* Mobile Toggle */}
+        <button
+          className="lg:hidden text-white text-2xl focus:outline-none"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? <FaTimes /> : <FaBars />}
+        </button>
       </div>
-    </div>
+
+      {/* Mobile Sidebar Overlay */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed inset-y-0 right-0 w-[75%] bg-black/95 backdrop-blur-2xl z-50 flex flex-col p-10 lg:hidden border-l border-white/10"
+          >
+            <button
+              className="self-end text-white text-3xl mb-10"
+              onClick={() => setIsOpen(false)}
+            >
+              <FaTimes />
+            </button>
+
+            <ul className="flex flex-col space-y-8 text-2xl font-semibold text-white">
+              {navLinks.map((link, idx) => (
+                <motion.li
+                  key={idx}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                >
+                  <Link
+                    to={link.path}
+                    onClick={() => setIsOpen(false)}
+                    className="hover:text-purple-500"
+                  >
+                    {link.name}
+                  </Link>
+                </motion.li>
+              ))}
+            </ul>
+
+            <div className="mt-auto">
+              <a
+                href={resumeLink}
+                className="w-full flex justify-center items-center gap-3 py-4 bg-white text-black rounded-xl font-bold"
+              >
+                Download CV <FaDownload />
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
   );
 };
 
