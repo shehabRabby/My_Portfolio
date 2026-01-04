@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router";
+import { Link } from "react-router"; // or 'react-router-dom' depending on your setup
 import { motion, AnimatePresence } from "framer-motion";
 import { FaBars, FaTimes, FaDownload } from "react-icons/fa";
 
@@ -7,7 +7,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Resume details for Shehab Rabby
+  // Your verified Resume link from Google Drive
   const resumeLink =
     "https://drive.google.com/uc?export=download&id=1MFjgM3taPDCTlZqzzax57t3DWzLlL6Xs";
 
@@ -17,9 +17,11 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Updated navigation links including Skills
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "About Me", path: "/about-me" },
+    { name: "Skills", path: "/skills" }, // Added here
     { name: "Projects", path: "/projects" },
     { name: "Academic", path: "/academic" },
     { name: "Achievement", path: "/achievement" },
@@ -34,8 +36,8 @@ const Navbar = () => {
           : "bg-transparent py-5"
       }`}
     >
-      <div className="container max-w-7xl  mx-auto px-6 flex justify-between items-center">
-        {/* Logo with Hover Animation */}
+      <div className="container max-w-7xl mx-auto px-6 flex justify-between items-center">
+        {/* Logo */}
         <motion.div
           whileHover={{ scale: 1.05 }}
           className="text-2xl font-black tracking-tighter text-white cursor-pointer"
@@ -72,7 +74,7 @@ const Navbar = () => {
 
         {/* Mobile Toggle */}
         <button
-          className="lg:hidden text-white text-2xl focus:outline-none"
+          className="lg:hidden text-white text-2xl focus:outline-none z-[60]"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <FaTimes /> : <FaBars />}
@@ -89,6 +91,7 @@ const Navbar = () => {
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
             className="fixed inset-y-0 right-0 w-[75%] bg-black/95 backdrop-blur-2xl z-50 flex flex-col p-10 lg:hidden border-l border-white/10"
           >
+            {/* Close button inside sidebar */}
             <button
               className="self-end text-white text-3xl mb-10"
               onClick={() => setIsOpen(false)}
@@ -107,7 +110,7 @@ const Navbar = () => {
                   <Link
                     to={link.path}
                     onClick={() => setIsOpen(false)}
-                    className="hover:text-purple-500"
+                    className="hover:text-purple-500 transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -118,7 +121,7 @@ const Navbar = () => {
             <div className="mt-auto">
               <a
                 href={resumeLink}
-                className="w-full flex justify-center items-center gap-3 py-4 bg-white text-black rounded-xl font-bold"
+                className="w-full flex justify-center items-center gap-3 py-4 bg-white text-black rounded-xl font-bold hover:bg-purple-500 hover:text-white transition-all"
               >
                 Download CV <FaDownload />
               </a>

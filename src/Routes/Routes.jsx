@@ -7,6 +7,8 @@ import Projects from "../Pages/Projects/Projects";
 import Academcia from "../Pages/Education/Academcia";
 import Achievement from "../Pages/Achievement/Achievement";
 import ReadStory from "../Pages/About/ReadStory";
+import Details from "../Components/Project/Details";
+import Skills from "../Pages/Skills/Skills";
 
 export const router = createBrowserRouter([
   {
@@ -26,8 +28,16 @@ export const router = createBrowserRouter([
         Component: ReadStory,
       },
       {
+        path: "/skills",
+        Component: Skills,
+      },
+      {
         path: "/projects",
         Component: Projects,
+      },
+      {
+        path: "/projects-details/:id",
+        Component: Details,
       },
       {
         path: "/academic",

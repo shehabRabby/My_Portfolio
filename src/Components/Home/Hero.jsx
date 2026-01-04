@@ -28,13 +28,13 @@ const Hero = () => {
   }, []);
 
   return (
-    <main className="mb-2 relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#050505] px-6 pt-20 pb-10 text-white">
+    <main className="mb-2 relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#050505] px- pt-20 pb-10 text-white">
       {/* Dynamic Background Glows */}
       <div className="absolute top-0 left-0 z-0 h-full w-full bg-[radial-gradient(circle_at_50%_50%,rgba(120,50,255,0.1),transparent_50%)]"></div>
       <div className="absolute -top-20 -right-20 h-64 w-64 rounded-full bg-purple-600/20 blur-[100px] pointer-events-none"></div>
       <div className="absolute bottom-10 -left-10 h-48 w-48 rounded-full bg-pink-600/20 blur-[80px] pointer-events-none"></div>
 
-      <div className="z-10 flex w-full max-w-4xl flex-col items-center text-center md:flex-row md:text-left md:justify-between">
+      <div className="z-10 flex w-full max-w-7xl flex-col items-center text-center md:flex-row md:text-left md:justify-between">
         {/* Left Side: Text Content */}
         <div className="flex flex-col space-y-6 md:w-1/2">
           <motion.div
