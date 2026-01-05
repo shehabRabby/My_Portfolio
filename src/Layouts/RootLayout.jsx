@@ -1,44 +1,59 @@
-import React from 'react';
-import { Outlet, useLocation } from 'react-router'; // Using react-router-dom for location
+import React, { useMemo, useState, useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router'; 
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '../Pages/Shared/Navbar';
 import Footer from '../Pages/Shared/Footer';
+import WelcomeScreen from '../Components/Welcome/WelcomeScreen';
 
 const RootLayout = () => {
     const location = useLocation();
+    const [showWelcome, setShowWelcome] = useState(true);
+
+    const particles = useMemo(() => Array.from({ length: 25 }), []);
 
     return (
-        /* 1. Global Wrapper: Dark background and font smoothing */
-        <div className="min-h-screen bg-[#050505] text-white selection:bg-purple-500/30 selection:text-purple-200 antialiased overflow-x-hidden">
+        <div className="min-h-screen bg-[#050505] text-white antialiased overflow-x-hidden relative">
             
-            {/* 2. Global Background Elements: Subtle Glows that follow the user */}
-            <div className="fixed inset-0 pointer-events-none">
-                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-purple-900/10 blur-[120px]"></div>
-                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-blue-900/10 blur-[120px]"></div>
-            </div>
+            {/* 1. THE WELCOME OVERLAY - This now controls everything */}
+            <AnimatePresence mode="wait">
+                {showWelcome && (
+                    <WelcomeScreen onFinished={() => setShowWelcome(false)} />
+                )}
+            </AnimatePresence>
 
-            {/* 3. Navigation: Outside the container to stay full-width */}
-            <Navbar />
+            {/* 2. THE REST OF THE SITE - Only visible when Welcome is done */}
+            {!showWelcome && (
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1 }}
+                >
+                    {/* Background Effect */}
+                    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+                        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-purple-600/10 blur-[140px]" />
+                        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-blue-600/10 blur-[140px]" />
+                    </div>
 
-            {/* 4. Main Content Area */}
-            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                {/* Page Transition Wrapper */}
-                <AnimatePresence mode="wait">
-                    <motion.div
-                        key={location.pathname}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.4, ease: "easeOut" }}
-                        className="min-h-[calc(100vh-80px)]" // Ensures footer stays at bottom
-                    >
-                        <Outlet />
-                    </motion.div>
-                </AnimatePresence>
-            </main>
+                    <Navbar />
 
-            {/* 5. Footer */}
-            <Footer />
+                    <main className="relative z-10">
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                key={location.pathname}
+                                initial={{ opacity: 0, filter: "blur(10px)" }}
+                                animate={{ opacity: 1, filter: "blur(0px)" }}
+                                exit={{ opacity: 0, filter: "blur(10px)" }}
+                                transition={{ duration: 0.5 }}
+                                className="min-h-screen"
+                            >
+                                <Outlet />
+                            </motion.div>
+                        </AnimatePresence>
+                    </main>
+
+                    <Footer />
+                </motion.div>
+            )}
         </div>
     );
 };
