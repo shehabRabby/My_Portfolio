@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
-import { FaPaperPlane, FaEnvelope, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
+import { FaPaperPlane, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import { toast, Toaster } from "react-hot-toast";
 
 const Contact = () => {
@@ -21,6 +21,7 @@ const Contact = () => {
       )
       .then(
         () => {
+          // Success Toast
           toast.success("Message sent to Shehab! 🚀", {
             style: {
               borderRadius: '10px',
@@ -94,7 +95,7 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          {/* Glass-morphism Form */}
+          {/* Form */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -106,7 +107,7 @@ const Contact = () => {
                 <label className="text-[10px] font-black uppercase tracking-widest text-gray-500 ml-2">Your Name</label>
                 <input 
                   type="text" 
-                  name="user_name" // Ensure this matches your EmailJS template
+                  name="name" // Matches {{name}} in EmailJS
                   required
                   placeholder="John Doe"
                   className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-purple-600 transition-all placeholder:text-gray-700"
@@ -117,7 +118,7 @@ const Contact = () => {
                 <label className="text-[10px] font-black uppercase tracking-widest text-gray-500 ml-2">Email Address</label>
                 <input 
                   type="email" 
-                  name="user_email" // Ensure this matches your EmailJS template
+                  name="email" // Matches {{email}} in EmailJS
                   required
                   placeholder="john@example.com"
                   className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-purple-600 transition-all placeholder:text-gray-700"
@@ -127,7 +128,7 @@ const Contact = () => {
               <div className="space-y-2">
                 <label className="text-[10px] font-black uppercase tracking-widest text-gray-500 ml-2">Message</label>
                 <textarea 
-                  name="message" 
+                  name="message" // Matches {{message}} in EmailJS
                   rows="4" 
                   required
                   placeholder="What's on your mind?"
