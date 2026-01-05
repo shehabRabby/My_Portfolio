@@ -147,7 +147,7 @@ const Projects = () => {
       id: 10,
       type: "beginner",
       name: "Green Earth",
-      Description:
+      description:
         "A React/Tailwind app showcasing trees by category, allowing users to explore details and view selected tree information via interactive modals.",
       image: "https://i.ibb.co.com/0Vdyrq8G/image.png",
       stack: ["JavaScript", "HTML5", "CSS3"],
@@ -158,12 +158,23 @@ const Projects = () => {
       id: 11,
       type: "beginner",
       name: "Panda E-Commerce",
-      Description:
+      description:
         "A responsive e-commerce website built with HTML and CSS, showcasing products and layouts to practice web design and front-end fundamentals.",
       image: "https://i.ibb.co.com/mVF6snkb/image.png",
       stack: ["HTML5", "CSS3"],
       github: "https://github.com/shehabRabby/Panda_Ecomerce_Project",
       live: "https://shehabrabby.github.io/Panda_Ecomerce_Project/",
+    },
+    {
+      id: 12,
+      type: "beginner",
+      name: "Amazone Clone",
+      description:
+        "A simple Amazon-inspired e-commerce UI built with pure HTML and CSS to practice layout, styling, and responsive design fundamentals.",
+      image: "https://i.ibb.co.com/BHXgjxFh/image.png",
+      stack: ["HTML5", "CSS"],
+      github: "https://github.com/shehabRabby/Amazon_Clone",
+      live: "https://shehabrabby.github.io/Amazon_Clone/",
     },
   ];
 

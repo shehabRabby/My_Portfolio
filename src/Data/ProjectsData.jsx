@@ -202,7 +202,6 @@ export const allProjects = [
     live: "https://tourmaline-melba-67f57d.netlify.app/",
     Challenges:
       "Managing dynamic DOM updates for ticket statuses and ensuring accurate real-time counts while keeping the UI responsive and intuitive.",
-
     Improvements:
       "Adding persistent storage with local storage or backend integration, implementing ticket filtering and sorting, and enabling notifications for status changes.",
   },
@@ -210,7 +209,7 @@ export const allProjects = [
     id: 10,
     type: "beginner",
     name: "Green Earth",
-    Description:
+    description:
       "A React/Tailwind app showcasing trees by category, allowing users to explore details and view selected tree information via interactive modals.",
     image: "https://i.ibb.co.com/0Vdyrq8G/image.png",
     stack: ["JavaScript", "HTML5", "CSS3"],
@@ -226,7 +225,7 @@ export const allProjects = [
     id: 11,
     type: "beginner",
     name: "Green Earth",
-    Description:
+    description:
       "A responsive e-commerce website built with HTML and CSS, showcasing products and layouts to practice web design and front-end fundamentals.",
     image: "https://i.ibb.co.com/mVF6snkb/image.png",
     stack: ["HTML5", "CSS3"],
@@ -237,5 +236,20 @@ export const allProjects = [
 
     Improvements:
       "Adding interactivity with JavaScript, a working shopping cart, and a product filtering/search feature for a more complete e-commerce experience.",
+  },
+  {
+    id: 12,
+    type: "beginner",
+    name: "Amazon Clone",
+    description:
+      "A simple Amazon-inspired e-commerce UI built using pure HTML and CSS to practice layout structuring, responsive design, and UI styling fundamentals.",
+    image: "https://i.ibb.co.com/BHXgjxFh/image.png",
+    stack: ["HTML5", "CSS3"],
+    github: "https://github.com/shehabRabby/Amazon_Clone",
+    live: "https://shehabrabby.github.io/Amazon_Clone/",
+    Challenges:
+      "Replicating a complex e-commerce layout like Amazon using only HTML and CSS, managing responsiveness across different screen sizes, and maintaining consistent spacing and alignment.",
+    Improvements:
+      "Adding JavaScript for interactivity such as search, cart functionality, and dynamic product rendering, improving accessibility, and optimizing the UI for better performance and user experience.",
   },
 ];
