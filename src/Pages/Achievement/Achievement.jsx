@@ -64,23 +64,23 @@ const AchievementCard = ({ item, index }) => {
 const Achievement = () => {
   const achievements = [
     {
-      title: "Best Web Contributor",
+      title: "Takeoff Program Winner",
       organization: "Daffodil International University",
-      date: "Nov 2025",
+      date: "Nov 2023",
       description: "Recognized for developing an open-source library management system used by 500+ students during the campus tech fest.",
       link: "https://drive.google.com/file/d/1MFjgM3taPDCTlZqzzax57t3DWzLlL6Xs/view?usp=sharing"
     },
     {
-      title: "Hackathon Runner Up",
+      title: "Unlock Algorithm Contest",
       organization: "Inter-University Coding Expo",
-      date: "June 2025",
+      date: "June 2024",
       description: "Secured 2nd place among 50 teams by building a real-time disaster management dashboard using React and Firebase.",
       link: "https://drive.google.com/file/d/1MFjgM3taPDCTlZqzzax57t3DWzLlL6Xs/view?usp=sharing"
     },
     {
-      title: "Dean's Honor Award",
-      organization: "Faculty of Science & IT",
-      date: "Jan 2024",
+      title: "Under-19 Football Championship",
+      organization: "Gaibandha Govt Boys",
+      date: "Jan 2019",
       description: "Received prestigious academic recognition for maintaining a CGPA of 3.78+ for four consecutive semesters.",
       link: "https://drive.google.com/file/d/1MFjgM3taPDCTlZqzzax57t3DWzLlL6Xs/view?usp=sharing"
     }

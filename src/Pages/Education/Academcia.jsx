@@ -86,33 +86,33 @@ const Academcia = () => {
       institution: "Daffodil International University",
       location: "Ashulia, Dhaka",
       website: "https://daffodilvarsity.edu.bd/",
-      image: "https://images.unsplash.com/photo-1541339907198-e08756ebafe3?auto=format&fit=crop&q=80&w=800",
-      result: "CGPA 3.78",
+      image: "https://i.ibb.co.com/ZzM56BSK/image.png",
+      result: "CGPA 3.69",
       year: "2023 - Present",
       dept: "Computer Science & Engineering",
       district: "Dhaka"
     },
     {
       level: "Higher Secondary (HSC)",
-      institution: "Your College Name",
-      location: "District Name, Bangladesh",
-      website: "https://college-website.edu",
-      image: "https://images.unsplash.com/photo-1523050853064-88691f43818e?auto=format&fit=crop&q=80&w=800",
+      institution: "Gaibandha Govt College",
+      location: "Rangpur, Bangladesh",
+      website: "https://ggc.edu.bd/",
+      image: "https://i.ibb.co.com/4ZJL1KQc/image.png",
       result: "GPA 5.00",
-      year: "2020 - 2022",
+      year: "2021 - 2022",
       dept: "Science",
-      district: "Your District"
+      district: "Rangpur"
     },
     {
       level: "Secondary School (SSC)",
-      institution: "Your School Name",
-      location: "Village/Area, Bangladesh",
-      website: "https://school-website.edu",
-      image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=800",
+      institution: "Gaibandha Govt High School",
+      location: "Gorshthanpara/Gaibandha, Bangladesh",
+      website: "https://ggbhs.edu.bd/",
+      image: "https://i.ibb.co.com/9kBypPg8/image.png",
       result: "GPA 5.00",
-      year: "2018 - 2020",
+      year: "2019 - 2020",
       dept: "Science",
-      district: "Your District"
+      district: "Rangpur"
     }
   ];
 
