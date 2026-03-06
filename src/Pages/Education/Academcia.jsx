@@ -1,27 +1,27 @@
-import React, { memo } from "react";
-import { motion } from "framer-motion";
+import React, { memo, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { FaGraduationCap, FaMapMarkerAlt, FaGlobe, FaCertificate, FaCalendarAlt, FaAward } from "react-icons/fa";
 
-// Memoized Card to prevent unnecessary re-renders
+// Memoized Card - Logic remains identical to your provided code
 const AcademicCard = memo(({ data, isFeatured }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }} // Reduced y offset for faster-feeling reveal
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }} // Trigger slightly earlier for perceived speed
-      transition={{ duration: 0.5, ease: "easeOut" }} // Optimized duration
-      className={`relative group rounded-[2rem] overflow-hidden border border-white/5 bg-gradient-to-b from-white/5 to-transparent p-1 ${
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className={`relative group rounded-[2rem] overflow-hidden border border-white/5 bg-[#0a0a0a]/40 backdrop-blur-md p-1 ${
         isFeatured ? "md:col-span-2" : "col-span-1"
       }`}
     >
-      <div className="bg-[#0a0a0a] rounded-[1.9rem] p-6 md:p-10 h-full flex flex-col md:flex-row gap-8 items-center">
-        
-        {/* Optimized Image Section */}
+      <div className="bg-[#0a0a0a]/60 rounded-[1.9rem] p-6 md:p-10 h-full flex flex-col md:flex-row gap-8 items-center">
+        {/* We keep the image section in the card for mobile/consistency, 
+            but the "Feature" image will be the sticky one */}
         <div className="relative w-full md:w-1/3 aspect-square rounded-2xl overflow-hidden transform-gpu">
            <motion.img 
-             loading="lazy" // Native lazy loading
+             loading="lazy"
              whileHover={{ scale: 1.05 }}
-             transition={{ duration: 0.3 }} // Snappier hover
+             transition={{ duration: 0.3 }}
              src={data.image} 
              alt={data.institution} 
              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 will-change-transform"
@@ -29,7 +29,6 @@ const AcademicCard = memo(({ data, isFeatured }) => {
            <div className="absolute inset-0 bg-purple-500/10 group-hover:bg-transparent transition-colors pointer-events-none" />
         </div>
 
-        {/* Content Section */}
         <div className="flex-1 w-full text-left">
           <div className="flex items-start justify-between mb-4">
             <div>
@@ -82,11 +81,11 @@ const AcademicCard = memo(({ data, isFeatured }) => {
   );
 });
 
-// Setting Display Name for debugging
 AcademicCard.displayName = "AcademicCard";
 
 const Academcia = () => {
-  // Static data moved outside or memoized to prevent recreation on every render
+  const sectionRef = useRef(null);
+  
   const education = React.useMemo(() => [
     {
       level: "University Career",
@@ -120,12 +119,49 @@ const Academcia = () => {
     }
   ], []);
 
+  // --- Scroll Image Feature Logic ---
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Smoothly interpolate opacity for 3 images based on scroll position
+  const opacity1 = useTransform(scrollYProgress, [0, 0.2, 0.4], [1, 1, 0]);
+  const opacity2 = useTransform(scrollYProgress, [0.35, 0.5, 0.7], [0, 1, 0]);
+  const opacity3 = useTransform(scrollYProgress, [0.65, 0.8, 1], [0, 1, 1]);
+  
+  // Subtle zoom effect on the container
+  const scale = useTransform(scrollYProgress, [0, 1], [1.05, 0.95]);
+
   return (
-    <section className="min-h-screen bg-[#050505] py-24 px-6 relative overflow-hidden contain-paint">
-      {/* Background Decorative Element with low-perf impact */}
+    <section ref={sectionRef} className="min-h-screen bg-[#050505] py-24 px-6 relative overflow-hidden contain-paint">
+      {/* Background Decorative Element */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-600/10 blur-[120px] rounded-full -z-10 pointer-events-none" />
       
-      <div className="max-w-7xl mx-auto">
+      {/* STICKY IMAGE BACKGROUND (The New Feature) */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-30">
+        <motion.div style={{ scale }} className="relative w-full h-full flex items-center justify-center">
+          <motion.img 
+            style={{ opacity: opacity1 }}
+            src={education[0].image} 
+            className="absolute w-full h-full object-cover grayscale blur-[2px]" 
+          />
+          <motion.img 
+            style={{ opacity: opacity2 }}
+            src={education[1].image} 
+            className="absolute w-full h-full object-cover grayscale blur-[2px]" 
+          />
+          <motion.img 
+            style={{ opacity: opacity3 }}
+            src={education[2].image} 
+            className="absolute w-full h-full object-cover grayscale blur-[2px]" 
+          />
+          {/* Vignette to keep text readable */}
+          <div className="absolute inset-0 bg-radial-gradient from-transparent to-[#050505] opacity-80" />
+        </motion.div>
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
         <header className="mb-16">
           <motion.h2 
             initial={{ opacity: 0, x: -15 }}
@@ -139,6 +175,8 @@ const Academcia = () => {
           <div className="h-1 w-20 bg-purple-600 mt-4 rounded-full" />
         </header>
 
+        {/* Using a Flex layout to keep images visible during scroll if desired, 
+            or keep the grid as requested */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <AcademicCard data={education[0]} isFeatured={true} />
           <AcademicCard data={education[1]} isFeatured={false} />
