@@ -26,7 +26,7 @@ const Aboutme = () => {
   ];
 
   return (
-    <section className="relative py-24 bg-[#050505] overflow-hidden" id="about">
+    <section className="relative py-24 bg-[#050505] mt-10 overflow-hidden" id="about">
       {/* Optimized Background: CSS Gradients instead of heavy blurs */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-[radial-gradient(circle_at_50%_50%,rgba(168,85,247,0.08),transparent_70%)] pointer-events-none" />
       
