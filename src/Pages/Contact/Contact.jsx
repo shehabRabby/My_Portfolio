@@ -1,7 +1,14 @@
 import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
-import { FaPaperPlane, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import {
+  FaPaperPlane,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaPhoneAlt,
+  FaFacebookF,
+  FaTelegramPlane,
+} from "react-icons/fa";
 import { toast, Toaster } from "react-hot-toast";
 
 const Contact = () => {
@@ -41,6 +48,40 @@ const Contact = () => {
       );
   };
 
+  // CONTACT DATA ARRAY
+  const contactInfo = [
+    {
+      icon: <FaEnvelope />,
+      label: "Email Me",
+      value: "shehabrabby764@gmail.com",
+      link: "mailto:shehabrabby764@gmail.com",
+    },
+    {
+      icon: <FaPhoneAlt />,
+      label: "Call Me",
+      value: "01773562177",
+      link: "tel:01773562177",
+    },
+    {
+      icon: <FaTelegramPlane />,
+      label: "Telegram",
+      value: "@Shehab00999",
+      link: "https://t.me/Shehab00999",
+    },
+    {
+      icon: <FaFacebookF />,
+      label: "Facebook",
+      value: "Shehab Al Rabby",
+      link: "https://www.facebook.com/share/1WWyXMPw91/",
+    },
+    {
+      icon: <FaMapMarkerAlt />,
+      label: "Location",
+      value: "Mirpur-1, Dhaka, BD",
+      link: "#",
+    },
+  ];
+
   return (
     <section
       className="min-h-screen bg-[#050505] py-32 px-6 relative overflow-hidden"
@@ -48,7 +89,6 @@ const Contact = () => {
     >
       <Toaster position="bottom-right" reverseOrder={false} />
 
-      {/* Dynamic Background Elements */}
       <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-purple-600/5 blur-[120px] rounded-full -z-10 animate-pulse" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-blue-600/5 blur-[120px] rounded-full -z-10" />
 
@@ -80,43 +120,35 @@ const Contact = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-5 space-y-6"
+            className="lg:col-span-5 space-y-4"
           >
-            {[
-              {
-                icon: <FaEnvelope />,
-                label: "Email Me",
-                value: "shehabrabby764@gmail.com",
-              },
-              {
-                icon: <FaMapMarkerAlt />,
-                label: "Location",
-                value: "Mirpur-1, Dhaka, Bangladesh",
-              },
-            ].map((item, idx) => (
-              <div
+            {contactInfo.map((item, idx) => (
+              <a
                 key={idx}
-                className="group relative p-8 rounded-[2rem] bg-white/[0.01] border border-white/5 hover:border-purple-500/40 transition-all duration-500 overflow-hidden"
+                href={item.link}
+                target="_blank"
+                rel="noreferrer"
+                className="block group relative p-6 rounded-[2rem] bg-white/[0.01] border border-white/5 hover:border-purple-500/40 transition-all duration-500 overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative z-10 flex items-center gap-6">
-                  <div className="w-16 h-16 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-2xl text-purple-500 group-hover:scale-110 group-hover:bg-purple-600 group-hover:text-white transition-all duration-500">
+                  <div className="w-14 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-xl text-purple-500 group-hover:scale-110 group-hover:bg-purple-600 group-hover:text-white transition-all duration-500">
                     {item.icon}
                   </div>
                   <div>
-                    <p className="text-[10px] font-black text-purple-500 uppercase tracking-[0.3em] mb-1">
+                    <p className="text-[9px] font-black text-purple-500 uppercase tracking-[0.3em] mb-0.5">
                       {item.label}
                     </p>
-                    <p className="text-lg md:text-xl font-bold text-white tracking-tight">
+                    <p className="text-base md:text-lg font-bold text-white tracking-tight">
                       {item.value}
                     </p>
                   </div>
                 </div>
-              </div>
+              </a>
             ))}
           </motion.div>
 
-          {/* Optimized Form Container */}
+          {/* Form Container */}
           <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             whileInView={{ opacity: 1, scale: 1 }}
