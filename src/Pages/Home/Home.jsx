@@ -18,14 +18,12 @@ const Home = () => {
   const scaleY = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
-    restDelta: 0.001
+    restDelta: 0.001,
   });
 
   return (
     <div className="bg-[#020202] min-h-screen selection:bg-purple-500/30">
-      
-  
-      <motion.div 
+      <motion.div
         className="fixed right-2 top-0 bottom-0 w-[1px] bg-white/5 z-50 origin-top hidden md:block"
         style={{ scaleY }}
       >
@@ -44,33 +42,39 @@ const Home = () => {
 
         {/* SECTION DIVIDER: Subtle Glow */}
         <div className="h-24 w-full bg-gradient-to-b from-[#020202] to-[#050505] relative">
-           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-purple-500/20 to-transparent" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-purple-500/20 to-transparent" />
         </div>
 
         {/* ABOUT SECTION */}
-        <section id="about" className="py-20 md:py-32 relative overflow-hidden bg-[#050505]">
+        <section
+          id="about"
+          className="py-20 md:py-20 relative overflow-hidden bg-[#050505]"
+        >
           <Aboutme />
         </section>
 
         {/* SKILLS SECTION */}
-        <section id="skills" className="py-20 md:py-32 bg-[#020202]">
+        <section id="skills" className="py-20 md:py-20 bg-[#020202]">
           <Skills />
         </section>
 
         {/* PROJECTS SECTION */}
-        <section id="projects" className="py-20 md:py-32 bg-[#050505] relative">
+        <section id="projects" className="py-20 md:py-20 bg-[#050505] relative">
           {/* Background Decorative Element */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-purple-600/5 blur-[120px] rounded-full pointer-events-none" />
           <Projects />
         </section>
 
         {/* ACADEMIC SECTION */}
-        <section id="academic" className="py-20 md:py-32 bg-[#020202]">
+        <section id="academic" className="py-20 md:py-20 bg-[#020202]">
           <Academcia />
         </section>
 
         {/* CONTACT SECTION */}
-        <section id="contact" className="py-20 md:py-32 bg-[#050505] relative overflow-hidden">
+        <section
+          id="contact"
+          className="py-20 md:py-20 bg-[#050505] relative overflow-hidden"
+        >
           {/* Bottom Glow reflecting the Hero's style */}
           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-64 bg-purple-900/10 blur-[150px] rounded-full pointer-events-none" />
           <Contact />
